@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "simplesongs.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
     private static final String TABLE_SONG = "song";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TITLE = "title";
@@ -68,11 +68,13 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(0);
                 String title = cursor.getString(1);
                 String singers = cursor.getString(2);
                 int year = cursor.getInt(3);
                 int stars = cursor.getInt(4);
                 Song song = new Song(title, singers, year, stars);
+                song.set_id(id);
                 songs.add(song);
             } while (cursor.moveToNext());
         }
@@ -93,6 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor = db.query(TABLE_SONG, columns, condition, args, null, null, null);
         if (cursor.moveToFirst()) {
             do {
+                int id = cursor.getInt(0);
                 String title = cursor.getString(1);
                 String singer = cursor.getString(2);
                 int year = cursor.getInt(3);
@@ -100,6 +103,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
                 Song newSong = new Song(title, singer, year, stars);
+                newSong.set_id(id);
                 songs.add(newSong);
             } while (cursor.moveToNext());
         }
