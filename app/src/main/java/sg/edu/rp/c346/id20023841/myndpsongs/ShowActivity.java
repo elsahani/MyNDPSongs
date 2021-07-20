@@ -28,6 +28,7 @@ public class ShowActivity extends AppCompatActivity {
 
         btnFilter = findViewById(R.id.buttonFilter);
         lv = findViewById(R.id.lvSongs);
+
         al = new ArrayList<Song>();
         al.addAll(dbh.getAllSongs());
         aa = new ArrayAdapter<>(ShowActivity.this, android.R.layout.simple_list_item_1, al);

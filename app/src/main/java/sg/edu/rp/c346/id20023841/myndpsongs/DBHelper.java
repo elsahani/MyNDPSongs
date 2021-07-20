@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "simplesongs.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String TABLE_SONG = "song";
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_TITLE = "title";
@@ -26,11 +26,11 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createSongTableSql = "CREATE TABLE " + TABLE_SONG + "("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT ,"
-                + COLUMN_TITLE + "TEXT ,"
-                + COLUMN_SINGERS + "TEXT ,"
-                + COLUMN_YEAR + "INTEGER ,"
-                + COLUMN_STARS + "INTEGER ) ";
+                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + COLUMN_TITLE + " TEXT,"
+                + COLUMN_SINGERS + " TEXT,"
+                + COLUMN_YEAR + " INTEGER,"
+                + COLUMN_STARS + " INTEGER ) ";
         db.execSQL(createSongTableSql);
         Log.i("info", "created tables");
     }
@@ -64,7 +64,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_STARS
                 + " FROM " + TABLE_SONG;
 
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
