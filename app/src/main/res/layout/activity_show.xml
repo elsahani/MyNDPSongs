@@ -11,7 +11,7 @@
         android:id="@+id/buttonFilter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show All songs with 5 Star" />
+        android:text="@string/show_all_songs_with_5_star" />
 
     <Spinner
         android:id="@+id/spinnerYear"

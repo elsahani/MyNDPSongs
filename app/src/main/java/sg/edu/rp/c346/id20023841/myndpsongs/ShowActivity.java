@@ -18,11 +18,15 @@ public class ShowActivity extends AppCompatActivity {
     ArrayList<Song> al;
     ListView lv;
     ArrayAdapter<Song> aa;
+    Song song;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
+
+        Intent i = getIntent();
+        song = (Song) i.getSerializableExtra("song");
 
         DBHelper dbh = new DBHelper(ShowActivity.this);
 
@@ -44,6 +48,17 @@ public class ShowActivity extends AppCompatActivity {
                         EditActivity.class);
                 i.putExtra("song", song);
                 startActivity(i);
+            }
+        });
+
+        btnFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DBHelper dbh = new DBHelper(ShowActivity.this);
+                al.clear();
+                al.addAll(dbh.getAllSongsByStars("5"));
+                aa.notifyDataSetChanged();
+
             }
         });
 
